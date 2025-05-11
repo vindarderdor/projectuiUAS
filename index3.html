@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adidas Store</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 0;
+      display: block;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+      background: linear-gradient(135deg, #000000, #333333);
+      color: white;
+      position: relative;
+    }
+    .hero-text {
+      animation: fadeIn 1s ease-out;
+    }
+    .hero-img img {
+      max-width: 400px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .btn {
+      background-color: #fff;
+      color: #000;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .produk-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .produk {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 250px;
+    }
+    .produk img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    #keranjang {
+      background: #fff;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+    }
+    #arsip-produk {
+      padding: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      margin: 20px;
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Adidas Store</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#keranjang">Keranjang</a></li>
+      <li><a href="#arsip-produk">Arsip</a></li>
+    </ul>
+  </nav>
+  <section class="hero" id="beranda">
+    <div class="hero-text">
+      <h1>🔥 Diskon Besar Musim Ini!</h1>
+      <p>Temukan koleksi Adidas terbaru dengan potongan harga hingga 50%. Hanya sampai akhir bulan!</p>
+      <div>
+        <a href="#produk" class="btn">Lihat Katalog</a>
+        <a href="#keranjang" class="btn" style="background-color: yellow; color: black;">Cek Keranjang</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://i.imgur.com/8zBv8XM.png" alt="Hero Image">
+    </div>
+  </section>
+  <section id="produk" class="produk-container">
+    <div class="produk">
+      <img src="images/adidas8.jpg" alt="Sepatu 1">
+      <h3>Adidas JAVA</h3>
+      <p>Rp1.750.000</p>
+      <button onclick="tambahKeKeranjang('Adidas Running')">Tambah ke Keranjang</button>
+    </div>
+    <div class="produk">
+      <img src="images/adidas7.jpg" alt="Sepatu 2">
+      <h3>Adidas BALI </h3>
+      <p>Rp1.950.000</p>
+      <button onclick="tambahKeKeranjang('Adidas Superstar')">Tambah ke Keranjang</button>
+    </div>
+    <div class="produk">
+      <img src="images/adidas9.jpg" alt="Sepatu 3">
+      <h3>Adidas SUMATERA</h3>
+      <p>Rp3.200.000</p>
+      <button onclick="tambahKeKeranjang('Adidas Ultraboost')">Tambah ke Keranjang</button>
+    </div>
+  </section>
+  <section id="keranjang">
+    <h2>Keranjang Anda</h2>
+    <ul id="daftar-keranjang"></ul>
+  </section>
+  <section id="arsip-produk">
+    <h2>Arsip Produk</h2>
+    <p>Produk-produk lama atau tidak tersedia sementara akan ditampilkan di sini untuk referensi pelanggan.</p>
+    <ul>
+      <li>Adidas Originals (stok habis)</li>
+      <li>Adidas ZX Series (stok habis)</li>
+    </ul>
+  </section>
+  <footer>
+    <p>&copy; 2025 Adidas Store. All rights reserved.</p>
+  </footer>
+  <script>
+    const keranjang = [];
+    function tambahKeKeranjang(namaProduk) {
+      keranjang.push(namaProduk);
+      tampilkanKeranjang();
+    }
+    function tampilkanKeranjang() {
+      const daftar = document.getElementById('daftar-keranjang');
+      daftar.innerHTML = '';
+      keranjang.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = item + ' ';
+        const btn = document.createElement('button');
+        btn.textContent = 'Hapus';
+        btn.onclick = () => {
+          keranjang.splice(index, 1);
+          tampilkanKeranjang();
+        };
+        li.appendChild(btn);
+        daftar.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
